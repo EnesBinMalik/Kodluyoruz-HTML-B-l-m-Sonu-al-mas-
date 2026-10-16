@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lezzet Durağı Restoranı | Kodluyoruz HTML Bölüm Sonu Çalışması</title>
+  <meta name="description" content="Kodluyoruz HTML Eğitimi Bölüm Sonu Çalışması - Enes Öztürk standartlarına uygun tam semantik Lezzet Durağı web sitesi.">
+  <style>
+    /* Temel Sıfırlama ve Değişkenler */
+    :root {
+      --bg-color: #faf9f6;
+      --surface-color: #ffffff;
+      --text-main: #27272a;
+      --text-muted: #71717a;
+      --primary: #c2410c;
+      --primary-hover: #9a3412;
+      --border-color: #e4e4e7;
+      --card-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+      --font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      line-height: 1.6;
+      padding-bottom: 2rem;
+    }
+
+    /* Kapsayıcı Konteyner */
+    .container {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Üst Alan (Header & Nav) */
+    header {
+      background-color: var(--surface-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 1.25rem 0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    header .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .brand-logo {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-logo span {
+      color: var(--text-main);
+    }
+
+    nav ul {
+      list-style-type: none;
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    /* Hero / Giriş Bölümü */
+    .hero-banner {
+      background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+      border: 1px solid #fed7aa;
+      border-radius: 1rem;
+      padding: 2.5rem;
+      margin: 2rem 0;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .hero-banner {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+      }
+    }
+
+    .hero-content h1 {
+      font-size: 2.2rem;
+      color: #7c2d12;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .hero-content p {
+      color: #9a3412;
+      font-size: 1.05rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background-color: var(--primary);
+      color: #ffffff;
+      padding: 0.75rem 1.5rem;
+      border-radius: 0.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+    }
+
+    .hero-cta:hover {
+      background-color: var(--primary-hover);
+    }
+
+    /* Görsel Çerçeve & Figür */
+    figure {
+      margin: 0;
+    }
+
+    .featured-image {
+      width: 100%;
+      height: 280px;
+      object-fit: cover;
+      border-radius: 0.75rem;
+      border: 3px solid #ffffff;
+      box-shadow: var(--card-shadow);
+      display: block;
+    }
+
+    figcaption {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.5rem;
+      text-align: center;
+      font-style: italic;
+    }
+
+    /* Ana Bölüm Başlıkları */
+    section {
+      background-color: var(--surface-color);
+      border: 1px solid var(--border-color);
+      border-radius: 0.75rem;
+      padding: 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--card-shadow);
+    }
+
+    section h2 {
+      font-size: 1.6rem;
+      color: var(--text-main);
+      border-bottom: 2px solid #ffedd5;
+      padding-bottom: 0.6rem;
+      margin-bottom: 1.25rem;
+    }
+
+    /* Makaleler (Articles) */
+    article {
+      background-color: #fafafa;
+      border: 1px solid var(--border-color);
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+
+    article:last-child {
+      margin-bottom: 0;
+    }
+
+    article h3 {
+      font-size: 1.25rem;
+      color: #9a3412;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Listeler ve İç İçe Hiyerarşi */
+    ul, ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    li {
+      margin-bottom: 0.4rem;
+    }
+
+    li > ul, li > ol {
+      margin-top: 0.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Bağlantı Stilleri */
+    a.external-link {
+      color: var(--primary);
+      text-decoration: underline;
+      font-weight: 500;
+    }
+
+    a.external-link:hover {
+      color: var(--primary-hover);
+    }
+
+    /* Satır İçi Vurgular */
+    strong {
+      color: #18181b;
+      font-weight: 600;
+    }
+
+    em {
+      color: #4b5563;
+    }
+
+    mark {
+      background-color: #fef08a;
+      padding: 0.1rem 0.3rem;
+      border-radius: 0.2rem;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.2rem 0.5rem;
+      background-color: #ffedd5;
+      color: #c2410c;
+      border-radius: 0.25rem;
+      margin-left: 0.5rem;
+    }
+
+    /* Yan Alan (Aside) */
+    aside {
+      background-color: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      border-radius: 0.5rem;
+      padding: 1.25rem;
+      margin-top: 1.5rem;
+    }
+
+    aside h4 {
+      font-size: 1rem;
+      color: #334155;
+      margin-bottom: 0.5rem;
+    }
+
+    /* İletişim & Alt Alan (Footer) */
+    footer {
+      background-color: #18181b;
+      color: #a1a1aa;
+      padding: 2.5rem 0;
+      margin-top: 3rem;
+      border-radius: 0.75rem;
+    }
+
+    footer .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    footer h4 {
+      color: #ffffff;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    footer ul {
+      list-style-type: none;
+      margin-left: 0;
+    }
+
+    footer li {
+      margin-bottom: 0.5rem;
+    }
+
+    footer a {
+      color: #d4d4d8;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    footer a:hover {
+      color: #ffffff;
+    }
+
+    address {
+      font-style: normal;
+      line-height: 1.6;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #27272a;
+      padding-top: 1.5rem;
+      text-align: center;
+      font-size: 0.875rem;
+    }
+
+    .footer-bottom p {
+      color: #71717a;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================
+       1. ÜST BÖLÜM: HEADER VE NAVİGASYON (Semantic <header> & <nav>)
+       ======================================================== -->
+  <header>
+    <div class="container header-inner">
+      <a href="#anasayfa" class="brand-logo">
+        Lezzet<span>Durağı</span>
+      </a>
+
+      <!-- Sayfa içi bağlantılar sunan semantik menü -->
+      <nav aria-label="Ana Menü">
+        <ul>
+          <li><a href="#anasayfa">Ana Sayfa</a></li>
+          <li><a href="#hakkimizda">Hakkımızda</a></li>
+          <li><a href="#menumuz">Menümüz</a></li>
+          <li><a href="#tarif">Özel Tarifimiz</a></li>
+          <li><a href="#iletisim">İletişim</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========================================================
+       2. ANA İÇERİK: TÜM SAYFANIN ÖZÜ (Semantic <main>)
+       Not: HTML5 standartlarında sayfada yalnızca bir adet <main> bulunur.
+       ======================================================== -->
+  <main class="container" id="anasayfa">
+
+    <!-- GİRİŞ BANNERI VE ÖZET TANITIM -->
+    <div class="hero-banner">
+      <div class="hero-content">
+        <h1>Geleneksel Lezzetler, Modern Dokunuşlar</h1>
+        <p>
+          <strong>Lezzet Durağı</strong>, 1998 yılından bu yana taze ve yerel malzemelerle
+          hazırlanan enfes tarifleri sofralarınıza taşıyor. Enes Öztürk ile Kodluyoruz
+          HTML eğitiminin incelikleriyle inşa edilen bu platformda en özel lezzetleri keşfedin.
+        </p>
+        <a href="#menumuz" class="hero-cta">Menüyü Keşfet &rarr;</a>
+      </div>
+
+      <!-- Semantik Görsel Çerçevesi: <figure> ve <figcaption> -->
+      <figure>
+        <svg class="featured-image" viewBox="0 0 400 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Lezzet Durağı Restoranı Sıcak Atmosferi">
+          <defs>
+            <linearGradient id="restGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#7c2d12"/>
+              <stop offset="50%" stop-color="#c2410c"/>
+              <stop offset="100%" stop-color="#431407"/>
+            </linearGradient>
+            <radialGradient id="lampGlow" cx="50%" cy="30%" r="50%">
+              <stop offset="0%" stop-color="#fed7aa" stop-opacity="0.8"/>
+              <stop offset="100%" stop-color="#c2410c" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="400" height="250" fill="url(#restGlow)"/>
+          <circle cx="200" cy="70" r="120" fill="url(#lampGlow)"/>
+          <!-- Masalar ve Tabaklar Çizimi -->
+          <ellipse cx="200" cy="210" rx="140" ry="35" fill="#27272a"/>
+          <ellipse cx="200" cy="195" rx="70" ry="16" fill="#f4f4f5"/>
+          <circle cx="200" cy="193" r="14" fill="#c2410c"/>
+          <path d="M120 70 L140 160 L100 160 Z" fill="#ffedd5" opacity="0.3"/>
+          <circle cx="120" cy="65" r="8" fill="#fef08a"/>
+          <path d="M280 70 L300 160 L260 160 Z" fill="#ffedd5" opacity="0.3"/>
+          <circle cx="280" cy="65" r="8" fill="#fef08a"/>
+          <text x="200" y="115" font-family="system-ui, sans-serif" font-size="20" font-weight="bold" fill="#ffffff" text-anchor="middle">LEZZET DURAĞI</text>
+          <text x="200" y="140" font-family="system-ui, sans-serif" font-size="12" fill="#fed7aa" text-anchor="middle">Artisan Restoran &amp; Gurme Mutfak</text>
+        </svg>
+        <figcaption>Görsel 1: Lezzet Durağı'nın sıcak ve otantik akşam yemeği atmosferi.</figcaption>
+      </figure>
+    </div>
+
+    <!-- ========================================================
+         HAKKIMIZDA BÖLÜMÜ (Semantic <section>)
+         ======================================================== -->
+    <section id="hakkimizda">
+      <h2>Hakkımızda &amp; Hikayemiz</h2>
+      <p>
+        <strong>Lezzet Durağı</strong>, mutfak tutkusuyla yola çıkan üç yakın arkadaşın İstanbul Boğazı'nın
+        kıyısında kurduğu butik bir gastronomi durağıdır. Misyonumuz, <em>"Her tabak bir hikaye anlatmalı"</em>
+        felsefesini yaşatarak Anadolu'nun bin yıllık lezzet mirasını modern pişirme teknikleriyle buluşturmaktır.
+      </p>
+      <br>
+      <p>
+        Restoranımızda kullanılan sebzeler her sabah yerel üreticilerden doğrudan temin edilmekte, ekşi mayalı
+        ekmeklerimiz ise <time datetime="05:30">sabah 05:30</time>'da taş fırınımızda özenle pişirilmektedir.
+        Gıda güvenliğine verdiğimiz önemi ve şeffaf mutfak standartlarımızı resmi olarak belgeleyen
+        <a href="https://www.tarimorman.gov.tr" target="_blank" rel="noopener noreferrer" class="external-link">
+          T.C. Tarım ve Orman Bakanlığı Denetim Raporu
+        </a>
+        bağlantısından inceleyebilirsiniz.
+      </p>
+    </section>
+
+    <!-- ========================================================
+         ÜRÜNLER / MENÜ BÖLÜMÜ (Semantic <section> ve <article>)
+         ======================================================== -->
+    <section id="menumuz">
+      <h2>Öne Çıkan Menümüz</h2>
+      <p>Şefimizin bu mevsime özel olarak seçtiği gurme lezzetler:</p>
+      <br>
+
+      <!-- 1. Ürün Makalesi -->
+      <article>
+        <h3>
+          Taş Fırında Dana İncik
+          <span class="badge">Şefin Tavsiyesi</span>
+        </h3>
+        <p>
+          12 saat boyunca meşe odunu közünde yavaşça pişirilmiş dana incik, kereviz püresi ve arpacık soğan
+          karamelizasyonu ile servis edilir.
+        </p>
+        <ul>
+          <li><strong>Porsiyon Gramajı:</strong> 420 gr</li>
+          <li><strong>Alerjen Uyarısı:</strong> <em>Kereviz ve süt ürünü içerir.</em></li>
+          <li><strong>Önerilen Eşlikçi:</strong> <mark>Ev yapımı fıçı limonata</mark></li>
+        </ul>
+      </article>
+
+      <!-- 2. Ürün Makalesi (İç içe sıralı ve sırasız listeler) -->
+      <article>
+        <h3>3 Aşamalı Tadım Menüsü</h3>
+        <p>Aşağıda masanıza sırasıyla servis edilecek özel tadım deneyimimiz yer almaktadır:</p>
+
+        <!-- Sıralı liste (<ol>) ve içinde sırasız liste (<ul>) uyumu -->
+        <ol>
+          <li>
+            <strong>1. Aşama - Başlangıç Lezzetleri:</strong>
+            <ul>
+              <li>Köz patlıcan yatağında manda burrata</li>
+              <li>Taze fesleğenli ve cevizli ezme salata</li>
+              <li>Zeytinyağlı mini enginar kalbi</li>
+            </ul>
+          </li>
+          <li>
+            <strong>2. Aşama - Ana Tabaklar:</strong>
+            <ul>
+              <li>Kömür ateşinde ızgara kaya levreği <em>(Rezene salatası ile)</em></li>
+              <li>Ağır ateşte pişmiş kuzu sırtı <em>(Trüf mantarlı siyez bulguru ile)</em></li>
+            </ul>
+          </li>
+          <li>
+            <strong>3. Aşama - Tatlı Sonu:</strong>
+            <ul>
+              <li>Belçika çikolatalı meşhur suflemiz</li>
+              <li>Damla sakızlı fırın sütlaç</li>
+            </ul>
+          </li>
+        </ol>
+
+        <p>
+          Detaylı alerjen tablosu ve menü kalori değerleri için
+          <a href="https://www.kodluyoruz.org" target="_blank" rel="noopener noreferrer" class="external-link">
+            Kodluyoruz Web Geliştirme Kaynakları
+          </a>
+          üzerindeki kılavuz standartlarını temel almaktayız.
+        </p>
+      </article>
+    </section>
+
+    <!-- ========================================================
+         ÖZEL TARİF BÖLÜMÜ (Çikolatalı Sufle - Kodluyoruz Klasiği)
+         ======================================================== -->
+    <section id="tarif">
+      <h2>Mutfaktan Tarif: Şefin Çikolatalı Suflesi</h2>
+      <p>
+        Kodluyoruz HTML eğitiminde Enes Öztürk hocamızın da bahsettiği o meşhur,
+        akışkan merkezli nefis çikolatalı sufle tarifini sizlerle paylaşıyoruz!
+      </p>
+      <br>
+
+      <article>
+        <h3>Gerekli Malzemeler (Sırasız Liste - &lt;ul&gt;)</h3>
+        <ul>
+          <li><strong>120 gr</strong> bitter çikolata (<em>en az %70 kakao</em>)</li>
+          <li><strong>80 gr</strong> tereyağı (oda sıcaklığında)</li>
+          <li><strong>3 adet</strong> organik yumurta</li>
+          <li><strong>50 gr</strong> toz şeker (yaklaşık yarım çay bardağı)</li>
+          <li><strong>2 yemek kaşığı</strong> elenmiş un</li>
+          <li>1 çimdik deniz tuzu</li>
+        </ul>
+      </article>
+
+      <article>
+        <h3>Adım Adım Hazırlanışı (Sıralı Liste - &lt;ol&gt;)</h3>
+        <ol>
+          <li>Fırını önceden <strong>200°C</strong>'ye ayarlayın ve ısıtmaya başlayın.</li>
+          <li>Tereyağı ile bitter çikolatayı benmari usulü eritin ve ılımaya bırakın.</li>
+          <li>Ayrı bir kapta yumurtaları ve toz şekeri beyaz köpük olana kadar çırpın.</li>
+          <li>Ilıyan çikolata karışımını yumurtalı karışıma yavaşça ekleyerek spatula ile karıştırın.</li>
+          <li>Elenmiş unu ve tuzu ilave edip homojen bir kıvam elde edene kadar katlama yöntemiyle karıştırın.</li>
+          <li>Yağlanmış sufle kaplarına paylaştırıp tam <time datetime="PT8M">8 dakika</time> pişirin.</li>
+          <li>Fırından çıkardıktan sonra pudra şekeri serpip hemen sıcak servis yapın!</li>
+        </ol>
+      </article>
+
+      <!-- Yan Bilgi Alanı: <aside> -->
+      <aside>
+        <h4>💡 Şefin Püf Noktası (Semantic &lt;aside&gt;)</h4>
+        <p>
+          Sufleyi fırından erken çıkarırsanız içi tamamen sıvı kalabilir, geç çıkarırsanız kekleşebilir.
+          Kusursuz akışkanlık için kaplarınızı fırının orta rafına yerleştirin ve fırın kapağını ilk
+          <strong>7 dakika</strong> boyunca kesinlikle açmayın!
+        </p>
+      </aside>
+    </section>
+
+  </main>
+
+  <!-- ========================================================
+       3. ALT ALAN: İLETİŞİM VE TELİF HAKLARI (Semantic <footer>)
+       ======================================================== -->
+  <footer id="iletisim">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <!-- Kolon 1: Marka & Hakkında -->
+        <div>
+          <h4>Lezzet Durağı Restoranı</h4>
+          <p>
+            Anadolu'nun geleneksel tatlarını modern gastronomi anlayışıyla buluşturan
+            bağımsız aile işletmesi.
+          </p>
+        </div>
+
+        <!-- Kolon 2: Hızlı Bağlantılar -->
+        <div>
+          <h4>Hızlı Bağlantılar</h4>
+          <nav aria-label="Alt Menü">
+            <ul>
+              <li><a href="#anasayfa">Ana Sayfa</a></li>
+              <li><a href="#hakkimizda">Hakkımızda</a></li>
+              <li><a href="#menumuz">Menü &amp; Fiyatlar</a></li>
+              <li><a href="#tarif">Sufle Tarifi</a></li>
+            </ul>
+          </nav>
+        </div>
+
+        <!-- Kolon 3: İletişim Bilgileri (<address> Etiketi) -->
+        <div>
+          <h4>Bize Ulaşın</h4>
+          <address>
+            <p><strong>Adres:</strong> Çengelköy Cad. No: 42, Üsküdar / İstanbul</p>
+            <p><strong>Telefon:</strong> <a href="tel:+902165550198">+90 (216) 555 01 98</a></p>
+            <p><strong>E-Posta:</strong> <a href="mailto:info@lezzetduragi.com">info@lezzetduragi.com</a></p>
+            <p><strong>Çalışma Saatleri:</strong> Salı - Pazar 11:30 - 23:00</p>
+          </address>
+        </div>
+
+      </div>
+
+      <!-- Telif Hakları ve Eğitim Referansı -->
+      <div class="footer-bottom">
+        <p>
+          &copy; 2026 Lezzet Durağı. Tüm hakları saklıdır.
+          Bu proje, <a href="https://www.kodluyoruz.org" target="_blank" rel="noopener noreferrer" style="color: #fed7aa; text-decoration: underline;">Kodluyoruz</a>
+          Frontend Web Geliştirme Patikası <strong>HTML Bölüm Sonu Çalışması</strong> (Eğitmen: Enes Öztürk) kapsamında hazırlanmıştır.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

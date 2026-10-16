@@ -1,0 +1,6 @@
+{
+  "name": "Kodluyoruz HTML Bölüm Sonu Çalışması",
+  "description": "Enes Öztürk HTML Eğitimi standartlarına tam uyumlu, semantik etiketlerle zenginleştirilmiş Lezzet Durağı web sitesi ve interaktif kod inceleme ortamı.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
